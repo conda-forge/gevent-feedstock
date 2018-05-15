@@ -14,7 +14,7 @@ source:
     - 0001-Allow-include-flags-to-be-present-in-CFLAGS.patch
 
 build:
-  number: 2
+  number: 0
   script: python setup.py install --single-version-externally-managed --record record.txt
 
 requirements:
