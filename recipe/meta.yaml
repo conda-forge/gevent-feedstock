@@ -19,7 +19,11 @@ build:
 
 requirements:
   host:
-    - cffi >=1.3.0  # [not win]
+    # cffi 1.4.0 is the general minimum version
+    # With Python 3 version 1.11.3 is minimum
+    # On windows 1.11.5 is the minimum
+    # Rather than special casing each of these use a single minimum version
+    - cffi >=1.11.5
     - python
     - setuptools
 
@@ -27,7 +31,7 @@ requirements:
     - {{ compiler('c') }}
 
   run:
-    - cffi >=1.3.0  # [not win]
+    - cffi >=1.11.5
     - python
     - greenlet >=0.4.10
 
