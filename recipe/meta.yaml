@@ -17,20 +17,24 @@ build:
 
 requirements:
   build:
+    - toolchain
     - cython
-    - cffi >=1.3.0  # [not win]
+    - cffi >=1.11.5
     - python
     - setuptools
 
   run:
-    - cffi >=1.3.0  # [not win]
+    - cffi >=1.11.5
     - python
-    - greenlet >=0.4.10
+    - greenlet >=0.4.13
 
 test:
   imports:
     - gevent
+    - gevent._ffi
     - gevent.libev
+    - gevent.libuv
+    - gevent.resolver
 
 about:
   home: http://www.gevent.org/
