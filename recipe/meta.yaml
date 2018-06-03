@@ -1,6 +1,6 @@
 {% set name = "gevent" %}
-{% set version = "1.3a1" %}
-{% set sha256 = "295351d0cf9a2c2d41bad2baf958461d3ce29a78f50ee48dd880c8063a7faf3c" %}
+{% set version = "1.3.2" %}
+{% set sha256 = "390d820f375626cd0406fdf9b2657f796818fa53c7cff34a9af0e34a4d6bc4ea" %}
 
 package:
   name: {{ name|lower }}
@@ -17,20 +17,24 @@ build:
 
 requirements:
   build:
+    - toolchain
     - cython
-    - cffi >=1.3.0  # [not win]
+    - cffi >=1.11.5
     - python
     - setuptools
 
   run:
-    - cffi >=1.3.0  # [not win]
+    - cffi >=1.11.5
     - python
-    - greenlet >=0.4.10
+    - greenlet >=0.4.13
 
 test:
   imports:
     - gevent
+    - gevent._ffi
     - gevent.libev
+    - gevent.libuv
+    - gevent.resolver
 
 about:
   home: http://www.gevent.org/
