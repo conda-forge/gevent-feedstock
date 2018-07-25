@@ -15,14 +15,16 @@ Gevent uses greenlet to provide a high-level synchronous API on top of the libev
 Current build status
 ====================
 
-Linux: [![Circle CI](https://circleci.com/gh/conda-forge/gevent-feedstock.svg?style=shield)](https://circleci.com/gh/conda-forge/gevent-feedstock)
-OSX: [![TravisCI](https://travis-ci.org/conda-forge/gevent-feedstock.svg?branch=master)](https://travis-ci.org/conda-forge/gevent-feedstock)
-Windows: [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/conda-forge/gevent-feedstock?svg=True)](https://ci.appveyor.com/project/conda-forge/gevent-feedstock/branch/master)
+[![Linux](https://img.shields.io/circleci/project/github/conda-forge/gevent-feedstock/master.svg?label=Linux)](https://circleci.com/gh/conda-forge/gevent-feedstock)
+[![OSX](https://img.shields.io/travis/conda-forge/gevent-feedstock/master.svg?label=macOS)](https://travis-ci.org/conda-forge/gevent-feedstock)
+[![Windows](https://img.shields.io/appveyor/ci/conda-forge/gevent-feedstock/master.svg?label=Windows)](https://ci.appveyor.com/project/conda-forge/gevent-feedstock/branch/master)
 
 Current release info
 ====================
-Version: [![Anaconda-Server Badge](https://anaconda.org/conda-forge/gevent/badges/version.svg)](https://anaconda.org/conda-forge/gevent)
-Downloads: [![Anaconda-Server Badge](https://anaconda.org/conda-forge/gevent/badges/downloads.svg)](https://anaconda.org/conda-forge/gevent)
+
+| Name | Downloads | Version | Platforms |
+| --- | --- | --- | --- |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-gevent-green.svg)](https://anaconda.org/conda-forge/gevent) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gevent.svg)](https://anaconda.org/conda-forge/gevent) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gevent.svg)](https://anaconda.org/conda-forge/gevent) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gevent.svg)](https://anaconda.org/conda-forge/gevent) |
 
 Installing gevent
 =================
