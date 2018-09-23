@@ -18,6 +18,9 @@ build:
   script: python setup.py install --single-version-externally-managed --record record.txt
 
 requirements:
+  build:
+    - {{ compiler('c') }}
+
   host:
     # cffi 1.4.0 is the general minimum version
     # With Python 3 version 1.11.3 is minimum
@@ -26,9 +29,6 @@ requirements:
     - cffi >=1.11.5
     - python
     - setuptools
-
-  build:
-    - {{ compiler('c') }}
 
   run:
     - cffi >=1.11.5
