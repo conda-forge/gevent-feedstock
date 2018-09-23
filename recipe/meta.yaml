@@ -12,6 +12,7 @@ source:
   sha256: {{ sha256 }}
   patches:
     - 0001-Allow-include-flags-to-be-present-in-CFLAGS.patch
+    - 0002-Allow-library-flags-to-be-present-in-LDFLAGS.patch
 
 build:
   number: 0
