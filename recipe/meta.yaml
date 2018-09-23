@@ -15,7 +15,7 @@ source:
 
 build:
   number: 0
-  script: python setup.py install --single-version-externally-managed --record record.txt
+  script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vvv"
 
 requirements:
   build:
@@ -28,7 +28,7 @@ requirements:
     # Rather than special casing each of these use a single minimum version
     - cffi >=1.11.5
     - python
-    - setuptools
+    - pip
 
   run:
     - cffi >=1.11.5
