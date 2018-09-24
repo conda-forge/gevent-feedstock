@@ -1,0 +1,26 @@
+From 975620ef5aa62d0df3e89939cd78dd83daf0584a Mon Sep 17 00:00:00 2001
+From: Nehal J Wani <nehaljw.kkd1@gmail.com>
+Date: Sun, 23 Sep 2018 13:23:42 +0000
+Subject: [PATCH 2/2] Allow library flags to be present in LDFLAGS
+
+---
+ deps/c-ares/configure | 3 ---
+ 1 file changed, 3 deletions(-)
+
+diff --git a/deps/c-ares/configure b/deps/c-ares/configure
+index e2da2f5..9e7cd62 100755
+--- a/deps/c-ares/configure
++++ b/deps/c-ares/configure
+@@ -3872,9 +3872,6 @@ $as_echo "$as_me: LIBS error: LIBS may only be used to specify libraries (-lname
+       -I*)
+         xc_bad_var_ldflags=yes
+         ;;
+-      -l* | --library=*)
+-        xc_bad_var_ldflags=yes
+-        ;;
+     esac
+   done
+   if test $xc_bad_var_ldflags = yes; then
+-- 
+2.18.0
+

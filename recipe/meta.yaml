@@ -1,6 +1,6 @@
 {% set name = "gevent" %}
-{% set version = "1.3a1" %}
-{% set sha256 = "295351d0cf9a2c2d41bad2baf958461d3ce29a78f50ee48dd880c8063a7faf3c" %}
+{% set version = "1.3.6" %}
+{% set sha256 = "7b413c391e8ad6607b7f7540d698a94349abd64e4935184c595f7cdcc69904c6" %}
 
 package:
   name: {{ name|lower }}
@@ -10,22 +10,31 @@ source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: {{ sha256 }}
+  patches:
+    - 0001-Allow-include-flags-to-be-present-in-CFLAGS.patch
+    - 0002-Allow-library-flags-to-be-present-in-LDFLAGS.patch
 
 build:
   number: 0
-  script: python setup.py install --single-version-externally-managed --record record.txt
+  script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vvv"
 
 requirements:
   build:
-    - cython
-    - cffi >=1.3.0  # [not win]
+    - {{ compiler('c') }}
+
+  host:
+    # cffi 1.4.0 is the general minimum version
+    # With Python 3 version 1.11.3 is minimum
+    # On windows 1.11.5 is the minimum
+    # Rather than special casing each of these use a single minimum version
+    - cffi >=1.11.5
     - python
-    - setuptools
+    - pip
 
   run:
-    - cffi >=1.3.0  # [not win]
+    - cffi >=1.11.5
     - python
-    - greenlet >=0.4.10
+    - greenlet >=0.4.13
 
 test:
   imports:
