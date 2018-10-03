@@ -15,7 +15,7 @@ source:
     - 0002-Allow-library-flags-to-be-present-in-LDFLAGS.patch
 
 build:
-  number: 0
+  number: 1000
   script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vvv"
 
 requirements:
