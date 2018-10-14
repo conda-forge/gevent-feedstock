@@ -1,6 +1,6 @@
 {% set name = "gevent" %}
-{% set version = "1.3.6" %}
-{% set sha256 = "7b413c391e8ad6607b7f7540d698a94349abd64e4935184c595f7cdcc69904c6" %}
+{% set version = "1.3.7" %}
+{% set sha256 = "3f06f4802824c577272960df003a304ce95b3e82eea01dad2637cc8609c80e2c" %}
 
 package:
   name: {{ name|lower }}
@@ -15,7 +15,7 @@ source:
     - 0002-Allow-library-flags-to-be-present-in-LDFLAGS.patch
 
 build:
-  number: 1000
+  number: 0
   script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vvv"
 
 requirements:
