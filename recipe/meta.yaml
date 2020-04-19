@@ -25,6 +25,7 @@ requirements:
   build:
     - {{ compiler('c') }}
     - libmagic  # [unix]
+    - make      # [unix]
 
   host:
     # cffi 1.4.0 is the general minimum version
