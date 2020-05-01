@@ -10,10 +10,10 @@ source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: {{ sha256 }}
-  patches:
-    - 0001-Allow-include-flags-to-be-present-in-CFLAGS.patch
-    - 0002-Allow-library-flags-to-be-present-in-LDFLAGS.patch
-    - 0003-Do-not-use-hard-coded-path-for-file-command.patch
+  patches:                                                     # [unix]
+    - 0001-Allow-include-flags-to-be-present-in-CFLAGS.patch   # [unix]
+    - 0002-Allow-library-flags-to-be-present-in-LDFLAGS.patch  # [unix]
+    - 0003-Do-not-use-hard-coded-path-for-file-command.patch   # [unix]
 
 build:
   number: 0
