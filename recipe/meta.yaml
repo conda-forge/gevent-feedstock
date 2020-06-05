@@ -49,7 +49,6 @@ requirements:
 test:
   requires:
     - pip
-    - python
   imports:
     - gevent
     - gevent.libev
