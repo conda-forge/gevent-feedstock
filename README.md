@@ -1,7 +1,7 @@
 About gevent
 ============
 
-Home: http://www.gevent.org/
+Home: https://www.gevent.org
 
 Package license: MIT
 
