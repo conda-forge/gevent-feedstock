@@ -1,6 +1,6 @@
 {% set name = "gevent" %}
-{% set version = "20.6.0" %}
-{% set sha256 = "51cab8f792961a75da39452586bb3474eaa1607ab2c83398745ef1b9ba09cb92" %}
+{% set version = "20.6.1" %}
+{% set sha256 = "53fdc591806b1ed3a747a8a27839f7c6ae229155aad309e265682f0f398eb488" %}
 
 package:
   name: {{ name|lower }}
@@ -18,7 +18,7 @@ source:
     - 0005-Drop-isysroot-if-CONDA_BUILD_SYSROOT-is-specified.patch  # [unix]
 
 build:
-  number: 1
+  number: 0
   script:
     - copy %SRC_DIR%\deps\c-ares\ares_build.h.dist %SRC_DIR%\deps\c-ares\ares_build.h  # [win]
     - {{ PYTHON }} -m pip install . --no-deps --ignore-installed -vvv
