@@ -41,7 +41,7 @@ requirements:
   run:
     - cffi >=1.11.5
     - python
-    - greenlet >=0.4.17
+    - greenlet >=0.4.17,<2.0
     - zope.event
     - zope.interface
     - setuptools
