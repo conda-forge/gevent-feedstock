@@ -18,9 +18,10 @@ source:
     - 0005-Drop-isysroot-if-CONDA_BUILD_SYSROOT-is-specified.patch  # [unix]
 
 build:
-  number: 0
+  number: 1
   script:
-    - copy %SRC_DIR%\deps\c-ares\ares_build.h.dist %SRC_DIR%\deps\c-ares\ares_build.h  # [win]
+    - export GEVENTSETUP_EMBED_LIBEV=0 GEVENTSETUP_EMBED_LIBUV=0 GEVENTSETUP_EMBED_CARES=0  # [unix]
+    - copy %SRC_DIR%\deps\c-ares\ares_build.h.dist %SRC_DIR%\deps\c-ares\ares_build.h       # [win]
     - {{ PYTHON }} -m pip install . --no-deps --ignore-installed -vvv
 
 requirements:
@@ -37,6 +38,9 @@ requirements:
     - cffi >=1.11.5
     - pip
     - python
+    - libev     # [unix]
+    - libuv     # [unix]
+    - c-ares    # [unix]
 
   run:
     - cffi >=1.11.5
@@ -45,6 +49,8 @@ requirements:
     - zope.event
     - zope.interface
     - setuptools
+    # xref: https://github.com/conda-forge/libuv-feedstock/issues/48
+    - {{ pin_compatible('libuv') }}  # [unix]
 
 test:
   requires:
@@ -52,6 +58,8 @@ test:
   imports:
     - gevent
     - gevent.libev
+    - gevent.libuv
+    - gevent.resolver
   commands:
     - python -m pip check
 
@@ -59,11 +67,7 @@ about:
   home: https://www.gevent.org
   license: MIT
   license_family: MIT
-  license_file:
-    - LICENSE
-    - deps/libuv/LICENSE
-    - deps/libev/LICENSE
-    - deps/c-ares/LICENSE.md
+  license_file: LICENSE
   summary: Coroutine-based network library
   description: |
     Gevent uses greenlet to provide a high-level synchronous API on top of the libev event loop.
