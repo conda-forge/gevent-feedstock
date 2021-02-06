@@ -13,22 +13,22 @@ source:
   patches:   # [unix]
     - 0001-Allow-include-flags-to-be-present-in-CFLAGS.patch        # [unix]
     - 0002-Allow-library-flags-to-be-present-in-LDFLAGS.patch       # [unix]
-    - 0003-Do-not-use-hard-coded-path-for-file-command.patch        # [unix]
-    - 0004-Allow-macro-to-be-present-in-CFLAGS.patch                # [unix]
-    - 0005-Drop-isysroot-if-CONDA_BUILD_SYSROOT-is-specified.patch  # [unix]
+      #    - 0003-Do-not-use-hard-coded-path-for-file-command.patch        # [unix]
+      #  - 0004-Allow-macro-to-be-present-in-CFLAGS.patch                # [unix]
+      # - 0005-Drop-isysroot-if-CONDA_BUILD_SYSROOT-is-specified.patch  # [unix]
 
 build:
   number: 0
   script:
-    - export GEVENTSETUP_EMBED_LIBEV=0 GEVENTSETUP_EMBED_LIBUV=0 GEVENTSETUP_EMBED_CARES=0  # [unix]
+    #  - export GEVENTSETUP_EMBED_LIBEV=0 GEVENTSETUP_EMBED_LIBUV=0 GEVENTSETUP_EMBED_CARES=0  # [unix]
     - copy %SRC_DIR%\deps\c-ares\ares_build.h.dist %SRC_DIR%\deps\c-ares\ares_build.h       # [win]
     - {{ PYTHON }} -m pip install . --no-deps --ignore-installed -vvv
 
 requirements:
   build:
     - {{ compiler('c') }}
-    - libmagic  # [unix]
-    - make      # [unix]
+      #- libmagic  # [unix]
+      #- make      # [unix]
 
   host:
     # cffi 1.4.0 is the general minimum version
@@ -38,19 +38,19 @@ requirements:
     - cffi >=1.11.5
     - pip
     - python
-    - libev     # [unix]
-    - libuv     # [unix]
-    - c-ares    # [unix]
+      #- libev     # [unix]
+      #- libuv     # [unix]
+      #- c-ares    # [unix]
 
   run:
     - cffi >=1.11.5
     - python
-    - greenlet >=0.4.17,<2.0
-    - zope.event
-    - zope.interface
-    - setuptools
+    - greenlet >=0.4.14
+      #- zope.event
+      #- zope.interface
+      #- setuptools
     # xref: https://github.com/conda-forge/libuv-feedstock/issues/48
-    - {{ pin_compatible('libuv') }}  # [unix]
+    #- {{ pin_compatible('libuv') }}  # [unix]
 
 test:
   requires:
@@ -58,8 +58,8 @@ test:
   imports:
     - gevent
     - gevent.libev
-    - gevent.libuv
-    - gevent.resolver
+      #- gevent.libuv
+      #- gevent.resolver
   commands:
     - python -m pip check
 
