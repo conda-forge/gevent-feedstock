@@ -13,9 +13,6 @@ source:
   patches:   # [unix]
     - 0001-Allow-include-flags-to-be-present-in-CFLAGS.patch        # [unix]
     - 0002-Allow-library-flags-to-be-present-in-LDFLAGS.patch       # [unix]
-      #    - 0003-Do-not-use-hard-coded-path-for-file-command.patch        # [unix]
-      #  - 0004-Allow-macro-to-be-present-in-CFLAGS.patch                # [unix]
-      # - 0005-Drop-isysroot-if-CONDA_BUILD_SYSROOT-is-specified.patch  # [unix]
 
 build:
   number: 0
@@ -27,8 +24,6 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
-      #- libmagic  # [unix]
-      #- make      # [unix]
 
   host:
     # cffi 1.4.0 is the general minimum version
@@ -40,15 +35,11 @@ requirements:
     - python
     - libev     # [unix]
     - libuv     # [unix]
-      #- c-ares    # [unix]
 
   run:
     - cffi >=1.11.5
     - python
     - greenlet >=0.4.14
-      #- zope.event
-      #- zope.interface
-      #- setuptools
     # xref: https://github.com/conda-forge/libuv-feedstock/issues/48
     - {{ pin_compatible('libuv') }}  # [unix]
 
@@ -58,8 +49,6 @@ test:
   imports:
     - gevent
     - gevent.libev
-      #- gevent.libuv
-      #- gevent.resolver
   commands:
     - python -m pip check
 
