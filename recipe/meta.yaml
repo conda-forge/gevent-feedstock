@@ -1,6 +1,6 @@
 {% set name = "gevent" %}
-{% set version = "1.4.0" %}
-{% set sha256 = "1eb7fa3b9bd9174dfe9c3b59b7a09b768ecd496debfc4976a9530a3e15c990d1" %}
+{% set version = "1.5a2" %}
+{% set sha256 = "9c6de6aa9365929d6747b6bf376aaf880553b1ca08c61fc8eef4ed4e31a7e34a" %}
 
 package:
   name: {{ name|lower }}
@@ -17,12 +17,15 @@ source:
 build:
   number: 0
   script:
-    - copy %SRC_DIR%\deps\c-ares\ares_build.h.dist %SRC_DIR%\deps\c-ares\ares_build.h  # [win]
-    - "{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vvv"
+    - export GEVENTSETUP_EMBED_LIBEV=0 GEVENTSETUP_EMBED_LIBUV=0 GEVENTSETUP_EMBED_CARES=0  # [unix]
+    - copy %SRC_DIR%\deps\c-ares\ares_build.h.dist %SRC_DIR%\deps\c-ares\ares_build.h       # [win]
+    - {{ PYTHON }} -m pip install . --no-deps --ignore-installed -vvv
 
 requirements:
   build:
     - {{ compiler('c') }}
+    - libmagic  # [unix]
+    - make      # [unix]
 
   host:
     # cffi 1.4.0 is the general minimum version
@@ -32,16 +35,28 @@ requirements:
     - cffi >=1.11.5
     - python
     - pip
+    - libev     # [unix]
+    - libuv     # [unix]
+    - c-ares    # [unix]
+
 
   run:
     - cffi >=1.11.5
     - python
     - greenlet >=0.4.14
+    # xref: https://github.com/conda-forge/libuv-feedstock/issues/48
+    - {{ pin_compatible('libuv') }}  # [unix]
 
 test:
+  requires:
+    - pip
   imports:
     - gevent
     - gevent.libev
+    - gevent.libuv
+    - gevent.resolver
+  commands:
+    - python -m pip check
 
 about:
   home: http://www.gevent.org/
