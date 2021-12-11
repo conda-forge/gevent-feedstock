@@ -1,6 +1,6 @@
 {% set name = "gevent" %}
-{% set version = "21.8.0" %}
-{% set sha256 = "43e93e1a4738c922a2416baf33f0afb0a20b22d3dba886720bc037cd02a98575" %}
+{% set version = "21.12.0" %}
+{% set sha256 = "f48b64578c367b91fa793bf8eaaaf4995cb93c8bc45860e473bf868070ad094e" %}
 
 package:
   name: {{ name|lower }}
@@ -18,7 +18,7 @@ source:
     - 0005-Drop-isysroot-if-CONDA_BUILD_SYSROOT-is-specified.patch  # [unix]
 
 build:
-  number: 1
+  number: 0
   script:
     - export GEVENTSETUP_EMBED_LIBEV=0 GEVENTSETUP_EMBED_LIBUV=0 GEVENTSETUP_EMBED_CARES=0  # [unix]
     - copy %SRC_DIR%\deps\c-ares\ares_build.h.dist %SRC_DIR%\deps\c-ares\ares_build.h       # [win]
