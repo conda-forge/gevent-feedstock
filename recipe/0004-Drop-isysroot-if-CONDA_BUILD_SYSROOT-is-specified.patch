@@ -1,0 +1,33 @@
+From 5efaa69b3febdc628ed3603956547ee8d81e4ad4 Mon Sep 17 00:00:00 2001
+From: Nehal J Wani <nehaljw.kkd1@gmail.com>
+Date: Sat, 30 May 2020 20:22:46 -0400
+Subject: [PATCH 4/4] Drop -isysroot if CONDA_BUILD_SYSROOT is specified
+
+---
+ _setupares.py | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/_setupares.py b/_setupares.py
+index dfbd028e..04c66b96 100644
+--- a/_setupares.py
++++ b/_setupares.py
+@@ -6,6 +6,7 @@ setup helpers for c-ares.
+ from __future__ import print_function, absolute_import, division
+ 
+ import os
++import re
+ import os.path
+ import shutil
+ import sys
+@@ -36,6 +37,8 @@ _distutils_cflags = distutils.sysconfig.get_config_var("CFLAGS") or ''
+ cflags = _distutils_cflags + ((' ' + os.environ['CFLAGS']) if os.environ.get("CFLAGS") else '')
+ cflags = ('CFLAGS="%s"' % (cflags,)) if cflags else ''
+ 
++if os.environ.get('CONDA_BUILD_SYSROOT'):
++    cflags = re.sub(r'-isysroot [^ ]*', '', cflags)
+ 
+ # Use -r, not -e, for support of old solaris. See
+ # https://github.com/gevent/gevent/issues/777
+-- 
+2.42.0
+
