@@ -1,6 +1,6 @@
 {% set name = "gevent" %}
-{% set version = "23.9.0.post1" %}
-{% set sha256 = "943f26edada39dfd5f50551157bb9011191c7367be36e341d0f1cdecfe07a229" %}
+{% set version = "23.9.1" %}
+{% set sha256 = "72c002235390d46f94938a96920d8856d4ffd9ddf62a303a0d7c118894097e34" %}
 
 package:
   name: {{ name|lower }}
