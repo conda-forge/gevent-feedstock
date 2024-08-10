@@ -11,10 +11,7 @@ source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: {{ sha256 }}
   patches:   # [unix]
-    - 0001-Allow-include-flags-to-be-present-in-CFLAGS.patch        # [unix]
-    - 0002-Allow-library-flags-to-be-present-in-LDFLAGS.patch       # [unix]
-    - 0003-Allow-macro-to-be-present-in-CFLAGS.patch                # [unix]
-    - 0004-Drop-isysroot-if-CONDA_BUILD_SYSROOT-is-specified.patch  # [unix]
+    - 0001-Drop-isysroot-if-CONDA_BUILD_SYSROOT-is-specified.patch  # [unix]
 
 build:
   number: 0
@@ -29,6 +26,7 @@ requirements:
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
     - cffi                                   # [build_platform != target_platform]
     - {{ compiler('c') }}
+    - {{ stdlib("c") }}
     - libmagic  # [unix]
     - make      # [unix]
 
