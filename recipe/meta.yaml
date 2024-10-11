@@ -1,6 +1,6 @@
 {% set name = "gevent" %}
-{% set version = "23.9.0.post1" %}
-{% set sha256 = "943f26edada39dfd5f50551157bb9011191c7367be36e341d0f1cdecfe07a229" %}
+{% set version = "24.10.1" %}
+{% set sha256 = "75b5e85a88b95b4dc62cac60bdf17bb6ab0ab99b44cbb5d1833218a209694f2e" %}
 
 package:
   name: {{ name|lower }}
@@ -17,7 +17,7 @@ source:
     - 0004-Drop-isysroot-if-CONDA_BUILD_SYSROOT-is-specified.patch  # [unix]
 
 build:
-  number: 1
+  number: 0
   script:
     - export GEVENTSETUP_EMBED_LIBEV=0 GEVENTSETUP_EMBED_LIBUV=0 GEVENTSETUP_EMBED_CARES=0  # [unix]
     - copy %SRC_DIR%\deps\c-ares\ares_build.h.dist %SRC_DIR%\deps\c-ares\ares_build.h       # [win]
@@ -29,6 +29,7 @@ requirements:
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
     - cffi                                   # [build_platform != target_platform]
     - {{ compiler('c') }}
+    - {{ stdlib("c") }}
     - libmagic  # [unix]
     - make      # [unix]
 
