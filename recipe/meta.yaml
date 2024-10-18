@@ -27,33 +27,31 @@ requirements:
   build:
     - python                                 # [build_platform != target_platform]
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-    - cffi                                   # [build_platform != target_platform]
+    - cffi >=1.17.1                          # [build_platform != target_platform]
+    - cython >=3.0.11                        # [build_platform != target_platform]
     - {{ compiler('c') }}
     - {{ stdlib("c") }}
     - libmagic  # [unix]
     - make      # [unix]
 
   host:
-    # cffi 1.4.0 is the general minimum version
-    # With Python 3 version 1.11.3 is minimum
-    # On windows 1.11.5 is the minimum
-    # Rather than special casing each of these use a single minimum version
-    - cffi >=1.11.5
+    - cffi >=1.17.1
+    - cython >=3.0.11
     - pip
+    - setuptools >=40.8.0
+    - greenlet >=3.0.3
     - python
     - libev     # [unix]
     - libuv     # [unix]
     - c-ares    # [unix]
 
   run:
-    - cffi >=1.11.5
+    - cffi >=1.17.1
     - python
-    - greenlet >=2.0.0
+    - greenlet >=3.1.1
     - zope.event
     - zope.interface
     - setuptools
-    # xref: https://github.com/conda-forge/libuv-feedstock/issues/48
-    - {{ pin_compatible('libuv') }}  # [unix]
 
 test:
   requires:
