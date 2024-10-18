@@ -10,17 +10,11 @@ source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: {{ sha256 }}
-  patches:   # [unix]
-    - 0001-Allow-include-flags-to-be-present-in-CFLAGS.patch        # [unix]
-    - 0002-Allow-library-flags-to-be-present-in-LDFLAGS.patch       # [unix]
-    - 0003-Allow-macro-to-be-present-in-CFLAGS.patch                # [unix]
-    - 0004-Drop-isysroot-if-CONDA_BUILD_SYSROOT-is-specified.patch  # [unix]
 
 build:
   number: 0
   script:
-    - export GEVENTSETUP_EMBED_LIBEV=0 GEVENTSETUP_EMBED_LIBUV=0 GEVENTSETUP_EMBED_CARES=0  # [unix]
-    - copy %SRC_DIR%\deps\c-ares\ares_build.h.dist %SRC_DIR%\deps\c-ares\ares_build.h       # [win]
+    - export GEVENTSETUP_EMBED=0  # [unix]
     - {{ PYTHON }} -m pip install . --no-deps --ignore-installed -vvv
 
 requirements:
@@ -31,7 +25,6 @@ requirements:
     - cython >=3.0.11                        # [build_platform != target_platform]
     - {{ compiler('c') }}
     - {{ stdlib("c") }}
-    - libmagic  # [unix]
     - make      # [unix]
 
   host:
