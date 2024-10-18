@@ -56,6 +56,7 @@ test:
     - gevent.resolver
   commands:
     - python -m pip check
+    - python -m gevent.tests test__util.py test__monkey.py test__thread.py
 
 about:
   home: https://www.gevent.org
