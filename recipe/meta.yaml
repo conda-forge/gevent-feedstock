@@ -1,6 +1,6 @@
 {% set name = "gevent" %}
-{% set version = "24.10.2" %}
-{% set sha256 = "96e7bab9de56e0aca3858b8bc9c71f4eb0c0e12b7cf3cbfd170b62ce68cf71d7" %}
+{% set version = "24.10.3" %}
+{% set sha256 = "aa7ee1bd5cabb2b7ef35105f863b386c8d5e332f754b60cfc354148bd70d35d1" %}
 
 package:
   name: {{ name|lower }}
@@ -12,7 +12,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 1
+  number: 0
   script:
     - export GEVENTSETUP_EMBED=0  # [unix]
     - {{ PYTHON }} -m pip install . --no-deps --ignore-installed -vvv
