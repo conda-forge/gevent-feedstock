@@ -1,6 +1,6 @@
 {% set name = "gevent" %}
-{% set version = "23.9.0.post1" %}
-{% set sha256 = "943f26edada39dfd5f50551157bb9011191c7367be36e341d0f1cdecfe07a229" %}
+{% set version = "24.10.2" %}
+{% set sha256 = "96e7bab9de56e0aca3858b8bc9c71f4eb0c0e12b7cf3cbfd170b62ce68cf71d7" %}
 
 package:
   name: {{ name|lower }}
@@ -10,49 +10,41 @@ source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: {{ sha256 }}
-  patches:   # [unix]
-    - 0001-Allow-include-flags-to-be-present-in-CFLAGS.patch        # [unix]
-    - 0002-Allow-library-flags-to-be-present-in-LDFLAGS.patch       # [unix]
-    - 0003-Allow-macro-to-be-present-in-CFLAGS.patch                # [unix]
-    - 0004-Drop-isysroot-if-CONDA_BUILD_SYSROOT-is-specified.patch  # [unix]
 
 build:
-  number: 1
+  number: 0
   script:
-    - export GEVENTSETUP_EMBED_LIBEV=0 GEVENTSETUP_EMBED_LIBUV=0 GEVENTSETUP_EMBED_CARES=0  # [unix]
-    - copy %SRC_DIR%\deps\c-ares\ares_build.h.dist %SRC_DIR%\deps\c-ares\ares_build.h       # [win]
+    - export GEVENTSETUP_EMBED=0  # [unix]
     - {{ PYTHON }} -m pip install . --no-deps --ignore-installed -vvv
 
 requirements:
   build:
     - python                                 # [build_platform != target_platform]
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-    - cffi                                   # [build_platform != target_platform]
+    - cffi >=1.17.1                          # [build_platform != target_platform]
+    - cython >=3.0.11                        # [build_platform != target_platform]
     - {{ compiler('c') }}
-    - libmagic  # [unix]
+    - {{ stdlib("c") }}
     - make      # [unix]
 
   host:
-    # cffi 1.4.0 is the general minimum version
-    # With Python 3 version 1.11.3 is minimum
-    # On windows 1.11.5 is the minimum
-    # Rather than special casing each of these use a single minimum version
-    - cffi >=1.11.5
+    - cffi >=1.17.1
+    - cython >=3.0.11
     - pip
+    - setuptools >=40.8.0
+    - greenlet >=3.0.3
     - python
     - libev     # [unix]
     - libuv     # [unix]
     - c-ares    # [unix]
 
   run:
-    - cffi >=1.11.5
+    - cffi >=1.17.1
     - python
-    - greenlet >=2.0.0
+    - greenlet >=3.1.1
     - zope.event
     - zope.interface
     - setuptools
-    # xref: https://github.com/conda-forge/libuv-feedstock/issues/48
-    - {{ pin_compatible('libuv') }}  # [unix]
 
 test:
   requires:
@@ -64,6 +56,7 @@ test:
     - gevent.resolver
   commands:
     - python -m pip check
+    - python -m gevent.tests test__util.py test__monkey.py test__thread.py
 
 about:
   home: https://www.gevent.org
@@ -78,4 +71,5 @@ about:
 
 extra:
   recipe-maintainers:
+    - beenje
     - nehaljwani
