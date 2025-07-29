@@ -3,7 +3,7 @@ About gevent-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/gevent-feedstock/blob/main/LICENSE.txt)
 
-Home: https://www.gevent.org
+Home: https://www.gevent.org/
 
 Package license: MIT
 
@@ -14,7 +14,6 @@ Development: https://github.com/gevent/gevent
 Documentation: https://www.gevent.org/contents.html
 
 Gevent uses greenlet to provide a high-level synchronous API on top of the libev event loop.
-
 
 Current build status
 ====================
