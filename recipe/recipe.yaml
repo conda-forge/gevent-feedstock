@@ -1,0 +1,86 @@
+schema_version: 1
+
+context:
+  name: gevent
+  version: 25.5.1
+  sha256: 582c948fa9a23188b890d0bc130734a506d039a2e5ad87dae276a456cc683e61
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/${{ name }}-${{ version }}.tar.gz
+  sha256: ${{ sha256 }}
+  file_name: ${{ name }}-${{ version }}.tar.gz
+
+build:
+  number: 1
+  script:
+    - if: unix
+      then: export GEVENTSETUP_EMBED=0
+    - ${{ PYTHON }} -m pip install . --no-deps --ignore-installed -vvv
+
+requirements:
+  build:
+    - if: build_platform != target_platform
+      then: python
+    - if: build_platform != target_platform
+      then: cross-python_${{ target_platform }}
+    - if: build_platform != target_platform
+      then: cffi >=1.17.1
+    - if: build_platform != target_platform
+      then: cython >=3.0.11
+    - ${{ compiler('c') }}
+    - ${{ stdlib("c") }}
+    - if: unix
+      then: make
+  host:
+    - cffi >=1.17.1
+    - cython >=3.0.11
+    - pip
+    - setuptools >=40.8.0
+    - greenlet >=3.0.3
+    - python
+    - if: unix
+      then: libev
+    - if: unix
+      then: libuv
+    - if: unix
+      then: c-ares
+  run:
+    - cffi >=1.17.1
+    - python
+    - greenlet >=3.1.1
+    - zope.event
+    - zope.interface
+    - setuptools
+
+tests:
+  - python:
+      imports:
+        - gevent
+        - gevent.libev
+        - gevent.libuv
+        - gevent.resolver
+  - requirements:
+      run:
+        - pip
+    script:
+      - python -m pip check
+      - python -m gevent.tests test__util.py test__monkey.py test__thread.py
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: Coroutine-based network library
+  description: |
+    Gevent uses greenlet to provide a high-level synchronous API on top of the libev event loop.
+  homepage: https://www.gevent.org
+  repository: https://github.com/gevent/gevent
+  documentation: https://www.gevent.org/contents.html
+
+extra:
+  recipe-maintainers:
+    - beenje
+    - nehaljwani
