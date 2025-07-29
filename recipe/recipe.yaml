@@ -12,7 +12,6 @@ package:
 source:
   url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/${{ name }}-${{ version }}.tar.gz
   sha256: ${{ sha256 }}
-  file_name: ${{ name }}-${{ version }}.tar.gz
 
 build:
   number: 1
@@ -24,13 +23,11 @@ build:
 requirements:
   build:
     - if: build_platform != target_platform
-      then: python
-    - if: build_platform != target_platform
-      then: cross-python_${{ target_platform }}
-    - if: build_platform != target_platform
-      then: cffi >=1.17.1
-    - if: build_platform != target_platform
-      then: cython >=3.0.11
+      then:
+        - python
+        - cross-python_${{ target_platform }}
+        - cffi >=1.17.1
+        - cython >=3.0.11
     - ${{ compiler('c') }}
     - ${{ stdlib("c") }}
     - if: unix
@@ -43,11 +40,10 @@ requirements:
     - greenlet >=3.0.3
     - python
     - if: unix
-      then: libev
-    - if: unix
-      then: libuv
-    - if: unix
-      then: c-ares
+      then:
+        - libev
+        - libuv
+        - c-ares
   run:
     - cffi >=1.17.1
     - python
@@ -58,16 +54,13 @@ requirements:
 
 tests:
   - python:
+      pip_check: true
       imports:
         - gevent
         - gevent.libev
         - gevent.libuv
         - gevent.resolver
-  - requirements:
-      run:
-        - pip
-    script:
-      - python -m pip check
+  - script:
       - python -m gevent.tests test__util.py test__monkey.py test__thread.py
 
 about:
