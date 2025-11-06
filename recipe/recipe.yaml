@@ -1,24 +1,22 @@
 schema_version: 1
 
 context:
-  name: gevent
   version: "25.9.1"
-  sha256: adf9cd552de44a4e6754c51ff2e78d9193b7fa6eab123db9578a210e657235dd
 
 package:
-  name: ${{ name|lower }}
+  name: gevent
   version: ${{ version }}
 
 source:
-  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/${{ name }}-${{ version }}.tar.gz
-  sha256: ${{ sha256 }}
+  url: https://pypi.org/packages/source/g/gevent/gevent-${{ version }}.tar.gz
+  sha256: adf9cd552de44a4e6754c51ff2e78d9193b7fa6eab123db9578a210e657235dd
 
 build:
-  number: 0
+  number: 1
   script:
     - if: unix
       then: export GEVENTSETUP_EMBED=0
-    - ${{ PYTHON }} -m pip install . --no-deps --ignore-installed -vvv
+    - ${{ PYTHON }} -m pip install . -vvv --no-deps --no-build-isolation --disable-pip-version-check
 
 requirements:
   build:
@@ -50,7 +48,6 @@ requirements:
     - greenlet >=3.1.1
     - zope.event
     - zope.interface
-    - setuptools
 
 tests:
   - python:
