@@ -2,6 +2,10 @@ schema_version: 1
 
 context:
   version: "25.9.1"
+  # should agree in `setup.py` and `pyproject.toml`
+  cffi_min: "1.17.1"
+  cython_min: "3.0.11"
+  greenlet_min: "3.2.2"
 
 package:
   name: gevent
@@ -20,32 +24,33 @@ build:
 
 requirements:
   build:
+    - ${{ compiler("c") }}
+    - ${{ stdlib("c") }}
     - if: build_platform != target_platform
       then:
-        - python
+        - cffi >=${{ cffi_min }}
         - cross-python_${{ target_platform }}
-        - cffi >=1.17.1
-        - cython >=3.0.11
-    - ${{ compiler('c') }}
-    - ${{ stdlib("c") }}
+        - cython >=${{ cython_min }}
+        - greenlet >=${{ greenlet_min }}
+        - python
     - if: unix
       then: make
   host:
-    - cffi >=1.17.1
-    - cython >=3.0.11
+    - cffi >=${{ cffi_min }}
+    - cython >=${{ cython_min }}
+    - greenlet >=${{ greenlet_min }}
     - pip
-    - setuptools >=40.8.0
-    - greenlet >=3.0.3
     - python
+    - setuptools >=40.8.0
     - if: unix
       then:
+        - c-ares
         - libev
         - libuv
-        - c-ares
   run:
-    - cffi >=1.17.1
+    - cffi >=${{ cffi_min }}
+    - greenlet >=${{ greenlet_min }}
     - python
-    - greenlet >=3.1.1
     - zope.event
     - zope.interface
 
