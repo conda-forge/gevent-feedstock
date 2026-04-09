@@ -1,7 +1,7 @@
 schema_version: 1
 
 context:
-  version: "25.9.1"
+  version: "26.4.0"
   # should agree in `setup.py` and `pyproject.toml`
   cffi_min: "1.17.1"
   cython_min: "3.0.11"
@@ -13,10 +13,10 @@ package:
 
 source:
   url: https://pypi.org/packages/source/g/gevent/gevent-${{ version }}.tar.gz
-  sha256: adf9cd552de44a4e6754c51ff2e78d9193b7fa6eab123db9578a210e657235dd
+  sha256: 288d03addfccf0d1c67268358b6759b04392bf3bc35d26f3d9a45c82899c292d
 
 build:
-  number: 1
+  number: 0
   script:
     - if: unix
       then: export GEVENTSETUP_EMBED=0
