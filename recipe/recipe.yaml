@@ -1,10 +1,10 @@
 schema_version: 1
 
 context:
-  version: "26.4.0"
+  version: "26.5.0"
   # should agree in `setup.py` and `pyproject.toml`
   cffi_min: "1.17.1"
-  cython_min: "3.2.1"
+  cython_min: "3.2.4"
   greenlet_min: "3.2.2"
 
 package:
@@ -13,7 +13,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/g/gevent/gevent-${{ version }}.tar.gz
-  sha256: 288d03addfccf0d1c67268358b6759b04392bf3bc35d26f3d9a45c82899c292d
+  sha256: 1655eb04c1e20d71b2aa4a3c7528162dd58ff6cc46a037af1f01f534c80fefba
 
 build:
   number: 0
