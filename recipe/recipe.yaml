@@ -16,7 +16,7 @@ source:
   sha256: 1655eb04c1e20d71b2aa4a3c7528162dd58ff6cc46a037af1f01f534c80fefba
 
 build:
-  number: 0
+  number: 1
   script:
     - if: unix
       then: export GEVENTSETUP_EMBED=0
