@@ -3,7 +3,7 @@ schema_version: 1
 context:
   version: "26.8.0"
   # should agree in `setup.py` and `pyproject.toml`
-  cffi_min: "1.17.1"
+  cffi_min: "2.1.1"
   cython_min: "3.2.4"
   greenlet_min: "3.2.2"
 
